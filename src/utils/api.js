@@ -8,7 +8,7 @@ export function getFoods() {
   const { data, error, isLoading } = useSWR(`${api_base_url}/foods`, fetcher);
 
   return {
-    foods: data.data,
+    foods: data?.data,
     isLoading,
     isError: error,
   };
