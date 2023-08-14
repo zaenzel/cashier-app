@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Layout from "../../global/Layout";
-import TableMenu from "./TableMenu/TableMenu";
+import WrapTableMenu from "./WrapTableMenu/WrapTableMenu";
 import FormAddFood from "./FormAddFood/FormAddFood";
 import { getFoods } from "../../../utils/api";
 import Loading from "../../global/Loading/Loading";
@@ -18,7 +18,7 @@ const Food = () => {
   return (
     <Layout>
       <div className="flex flex-col gap-5">
-        {!addForm ? <TableMenu addFormSet={addFormSet} foods={foods.data} /> : <FormAddFood />}
+        {!addForm ? <WrapTableMenu addFormSet={addFormSet} foods={foods.data} /> : <FormAddFood addFormSet={addFormSet} />}
       </div>
     </Layout>
   );

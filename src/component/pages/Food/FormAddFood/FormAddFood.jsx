@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import FileInput from "./FileInput";
 import { addFood } from "../../../../utils/api";
 
-const FormAddFood = () => {
+const FormAddFood = ({ addFormSet }) => {
   const [menu, menuSet] = useState({
     name: "",
     image: [],
-    price: 0,
+    price: "",
   });
 
   //   const addForm = () => {
@@ -21,16 +21,18 @@ const FormAddFood = () => {
 
     formData.append("name", menu.name);
     formData.append("price", menu.price);
-    formData.append("image", menu.image);
+    menu.image.forEach((file) => {
+      formData.append("image", file);
+    });
 
-    console.log(formData);
-
-    // try {
-    //   const res = await addFood(formData);
-    //   return res;
-    // } catch (error) {
-    //   console.log(error?.response?.data);
-    // }
+    try {
+      const res = await addFood(formData);
+      if (res.status === 201) { 
+        addFormSet(false);
+      }
+    } catch (error) {
+      console.log(error?.response?.data);
+    }
   };
 
   return (

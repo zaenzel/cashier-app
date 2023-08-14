@@ -15,9 +15,16 @@ export function getFoods() {
 }
 
 export function addFood(data) {
-  const res = axios.post(`${api_base_url}/foods`, {
-    data
-  });
+  const config = {
+    headers: { "content-type": "multipart/form-data" },
+  };
 
+  const res = axios.post(`${api_base_url}/foods`, data, config);
+
+  return res;
+}
+
+export function addTrasaction(data) {
+  const res = axios.post(`${api_base_url}/transactions`, data);
   return res;
 }
