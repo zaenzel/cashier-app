@@ -67,25 +67,24 @@ const Transaction = () => {
     */
   }
 
-  async function handlePayIsComplete() {
-    
-    // modalBillSet(!bill);
-    console.log("first")
-    
-    // try {
-    //   const res = await addTrasaction(bill);
-    //   if (res.status === 201) {
-    //     modalBillSet(false);
-    //     modalSuccessSet(true);
-    //   }
-    //   modalBillSet(false);
-    //   modalSuccessSet(true);
-    //   setTimeout(() => {
-    //     modalSuccessSet(false);
-    //   }, 2000);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+  async function handlePayIsComplete() {   
+    try {
+      const res = await addTrasaction(bill);
+      if (res.status === 201) {
+        modalBillSet(false);
+        modalSuccessSet(true);
+      }
+      modalBillSet(false);
+      modalSuccessSet(true);
+      setTimeout(() => {
+        modalSuccessSet(false);
+      }, 2000);
+      console.log(res)
+    } catch (error) {
+      console.log(error);
+    }
+
+    console.log(bill)
   }
 
   return (
@@ -98,6 +97,7 @@ const Transaction = () => {
           modalBillSet={modalBillSet}
           bill={bill}
           billSet={billSet}
+          handlePayIsComplete={handlePayIsComplete}
         />
       )}
 
@@ -120,7 +120,6 @@ const Transaction = () => {
             cartListSet={cartListSet}
             modalSuccessSet={modalSuccessSet}
             modalBillSet={modalBillSet}
-            handlePayIsComplete={handlePayIsComplete}
           />
         </div>
       </div>

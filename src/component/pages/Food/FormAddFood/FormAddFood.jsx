@@ -9,11 +9,6 @@ const FormAddFood = ({ addFormSet }) => {
     price: "",
   });
 
-  //   const addForm = () => {
-  //   }
-
-  //   console.log(formData);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -30,6 +25,7 @@ const FormAddFood = ({ addFormSet }) => {
       if (res.status === 201) { 
         addFormSet(false);
       }
+      location.reload()
     } catch (error) {
       console.log(error?.response?.data);
     }

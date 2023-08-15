@@ -32,11 +32,24 @@ const TableMenu = ({ foods }) => {
               <td className={classes}>
                 <p>{e.name}</p>
               </td>
+              {e.quantity && (
+                <td className={classes}>
+                  <p>x{e.quantity}</p>
+                </td>
+              )}
               <td className={classes}>
-                <img src={e.image} alt="foto produk" className="w-24 h-24 object-cover" />
+                <img
+                  src={e.image}
+                  alt="foto produk"
+                  className="w-24 h-24 object-cover"
+                />
               </td>
               <td className={classes}>
-                <p>{rupiah(e.price)}</p>
+                {e.total_price ? (
+                  <p>{rupiah(e.total_price)}</p>
+                ) : (
+                  <p>{rupiah(e.price)}</p>
+                )}
               </td>
             </tr>
           );

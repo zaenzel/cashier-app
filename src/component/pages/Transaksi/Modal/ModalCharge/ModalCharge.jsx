@@ -2,39 +2,19 @@ import React, { useState } from "react";
 import TableMenu from "../../../../global/TableMenu/TableMenu";
 import { rupiah } from "../../../../../utils/helper";
 
-const ModalCharge = ({
+const ModalCharge = ({    
   foods,
   modalBillSet,
   billSet,
   bill,
   handlePayIsComplete,
 }) => {
+
   const handleCash = (e) => {
     const { name, value } = e.target;
     const newValue = parseFloat(value);
     billSet((prev) => ({ ...prev, [name]: newValue }));
   };
-  
-  async function handlePayIsComplete() {
-    
-    // modalBillSet(!bill);
-    console.log("first")
-    
-    // try {
-    //   const res = await addTrasaction(bill);
-    //   if (res.status === 201) {
-    //     modalBillSet(false);
-    //     modalSuccessSet(true);
-    //   }
-    //   modalBillSet(false);
-    //   modalSuccessSet(true);
-    //   setTimeout(() => {
-    //     modalSuccessSet(false);
-    //   }, 2000);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-  }
 
   const handleToPay = () => {
     const total_price = foods.reduce((a, b) => a + b?.total_price, 0);
@@ -83,17 +63,19 @@ const ModalCharge = ({
             </div>
             <div>
               <p className="text-red-400">
-                Kembalian : {rupiah(bill.total_change)}
+                {bill.total_change >= 0 &&
+                  `Kembalian : ${rupiah(bill.total_change)}`}
               </p>
             </div>
-            {bill.total_change >= 0 ? (
+            {bill.total_change >= 0 && (
               <button
                 className="btn btn-success text-white"
                 onClick={handlePayIsComplete}
               >
                 Oke
               </button>
-            ) : (
+            )}
+            {bill.total_change < 0 && (
               <p className="text-red-400">
                 Uang pembeli tidak cukup untuk membayar
               </p>
